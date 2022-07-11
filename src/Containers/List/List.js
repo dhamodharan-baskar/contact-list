@@ -84,8 +84,11 @@ class List extends React.Component {
 
     return (
       <ListOverview>
-        <Header />
-       {this.renderList(contactList)}
+        <Header 
+         contacts={contactList}/>
+
+        {this.renderList(contactList)}
+
        <Modal 
         onRequestClose={() => this.onCloseDetailModal()}
         isOpen={isDeleteModal}>
@@ -95,6 +98,7 @@ class List extends React.Component {
           onSubmit={() => this.onSubmitDeleteModal()}
          />
        </Modal>
+
        <Modal 
         onRequestClose={() => this.onCloseDetailModal()}
         isOpen={isDetailModal}>

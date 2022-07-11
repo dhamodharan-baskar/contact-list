@@ -52,7 +52,7 @@ export const DetailsOverview = styled.div`
   display: flex;
 `;
 export const ContactDetails = styled.div`
-  padding: 12px;
+  padding: 0px 16px;
 `;
 export const ContactItem = styled.div`
   padding: 4px 0px;
