@@ -1,0 +1,5 @@
+export const GET_CONTACT_LIST = 'GET_CONTACT_LIST';
+export const UPDATE_CONTACT = 'UPDATE_CONTACT';
+export const FILTER_CONTACTS = 'FILTER_CONTACTS';
+export const SORT_CONTACTS = 'SORT_CONTACTS';
+export const IS_LOADING = 'IS_LOADING';
