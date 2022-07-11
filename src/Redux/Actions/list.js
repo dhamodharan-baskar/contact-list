@@ -5,7 +5,8 @@ import {
   FILTER_CONTACTS,
   IS_LOADING,
   DELETE_CONTACT,
-  ADD_CONTACT
+  ADD_CONTACT,
+  SORT_LIST
 } from '../ActionTypes'
 import axios from 'axios'
 
@@ -28,6 +29,13 @@ export const onAddContact = () => {
     })
   }
 };
+
+export const sortList = (isAscending) => {
+  return {
+    type: SORT_LIST ,
+    isAscending
+ }
+}
 
 export const addContact = (data) => {
   return {

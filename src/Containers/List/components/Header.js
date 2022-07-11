@@ -1,12 +1,17 @@
 import { useEffect, useState } from 'react';
 import {
   HeaderView,
-  Title
+  Title,
+  Button,
+  Sort,
+  Options,
+  SortButton
 } from '../list.styles'
 
 const Header = (props) => {
   const {
     contacts,
+    sortList,
     addContact
   } = props
   const [countries, setCountries] = useState([])
@@ -35,8 +40,17 @@ const Header = (props) => {
       <div>
        No of countries - {countries?.length}
       </div>
-      <div onClick={() => addContact()}>Add Contact</div>
-      Sort by 
+      <Options>
+        <Button onClick={() => addContact()}>
+          Add Contact
+        </Button>
+        {contacts?.length > 1 ?
+        <Sort>
+          Sort by : <SortButton onClick={() => sortList()}>Name</SortButton>
+        </Sort>
+        :
+        <div />}
+      </Options>
     </HeaderView>
   )
 };

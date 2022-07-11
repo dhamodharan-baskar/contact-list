@@ -5,3 +5,4 @@ export const FILTER_CONTACTS = 'FILTER_CONTACTS';
 export const SORT_CONTACTS = 'SORT_CONTACTS';
 export const IS_LOADING = 'IS_LOADING';
 export const ADD_CONTACT = 'ADD_CONTACT';
+export const SORT_LIST = 'SORT_LIST';

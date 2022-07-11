@@ -15,7 +15,8 @@ class List extends React.Component {
       isDeleteModal: false,
       isDetailModal: false,
       selectedIndex: null,
-      selectedContact: {}
+      selectedContact: {},
+      isAscending: true
     };
   }
 
@@ -43,6 +44,11 @@ class List extends React.Component {
 
   addContact = () => {
     this.props.onAddContact()
+  }
+
+  sortList = () => {
+    console.log('coming')
+    this.setState({isAscending: !this.state.isAscending})
   }
 
   onDeleteContact = (index) => {
@@ -90,6 +96,7 @@ class List extends React.Component {
       <ListOverview>
         <Header 
          addContact={this.addContact}
+         sortList={this.sortList}
          contacts={contactList}/>
         {this.renderList(contactList)}
 

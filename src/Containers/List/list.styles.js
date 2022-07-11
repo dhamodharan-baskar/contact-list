@@ -74,3 +74,35 @@ export const HeaderView = styled.div`
   align-items: center;
   border-radius: 8px;
 `;
+
+export const Button = styled.button`
+    margin: 12px;
+    cursor: pointer;
+    border: 1px solid #CFD7DF;
+    border-radius: 4px;
+    box-shadow: 0 0 white;
+    width: auto;
+    font-weight: 600;
+    padding: 0 10px;
+    position: relative;
+    text-align: center;
+    color: #12344D;
+    font-size: 14px;
+    opacity: 1;
+    height: 32px;
+    background: linear-gradient(180deg,#FFFFFF 0%,#F3F5F7 100%);
+`
+export const Options = styled.div` 
+  display: flex;
+  align-items: center;
+  width: 100%;
+`;
+
+export const Sort = styled.div` 
+  margin-left: auto;
+  display: flex;
+`;
+
+export const SortButton = styled.div` 
+  cursor: pointer;
+`;
