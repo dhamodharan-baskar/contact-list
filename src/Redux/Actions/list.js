@@ -1,14 +1,27 @@
 import {
-  GET_CONTACT_LIST,
+  SET_CONTACT_LIST,
   UPDATE_CONTACT,
   SORT_CONTACTS,
   FILTER_CONTACTS,
-  IS_LOADING
-} from 'Redux/ActionTypes';
+  IS_LOADING,
+  DELETE_CONTACT
+} from '../ActionTypes'
+import axios from 'axios'
 
 export const getContactList = () => {
+  return (dispatch) => {
+    return axios.get(`https://randomuser.me/api?results=10`,).then((response) => {
+      if (response.data) {
+        dispatch(setContactList(response.data));
+      }
+    })
+  }
+};
+
+export const setContactList = (data) => {
   return {
-      type: GET_CONTACT_LIST,
+      type: SET_CONTACT_LIST,
+      data
   }
 };
 
@@ -33,5 +46,12 @@ export const filterContacts = () => {
 export const sortContacts = () => {
   return {
       type: SORT_CONTACTS
+  }
+};
+
+export const deleteContact = (index) => {
+  return {
+      type: DELETE_CONTACT,
+      index
   }
 };
