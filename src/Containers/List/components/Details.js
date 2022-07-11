@@ -1,6 +1,9 @@
 import moment from 'moment';
 import {
-  DetailsOverview
+  DetailsOverview,
+  ContactDetails,
+  ContactItem,
+  Title
 } from '../list.styles'
 
 const Details = (props) => {
@@ -18,31 +21,36 @@ const Details = (props) => {
           }}
           alt="" />
       </div>
-      <div>
-        <div>
+      <ContactDetails>
+        <ContactItem>
          {`${contact?.name?.title} ${contact?.name?.first} ${contact?.name?.last}`}
-        </div>
-        <div>{moment(contact?.dob?.date).format("DD/MM/YYYY")} - {`${contact?.dob?.age} years old`}</div>
-        <div>{`${contact?.cell}`}</div>
-        <div>
+        </ContactItem>
+        <ContactItem>{moment(contact?.dob?.date).format("DD/MM/YYYY")} - {`${contact?.dob?.age} years old`}</ContactItem>
+        <ContactItem>{`${contact?.cell}`}</ContactItem>
+        <ContactItem>
           <a href={`mailto:${contact?.email}`}>{contact?.email}</a>
-        </div>
-        {
-          contact?.location?.street &&
+        </ContactItem>
+       { contact?.location && 
           <div>
-             {contact?.location?.street?.number + ' , ' + contact?.location?.street?.name}
+          <Title>Address:</Title>
+          {
+            contact?.location?.street &&
+            <ContactItem>
+              {contact?.location?.street?.number + ' , ' + contact?.location?.street?.name}
+            </ContactItem>
+          }
+          <ContactItem>
+            {contact?.location?.city}
+          </ContactItem>
+          <ContactItem>
+          {contact?.location?.state + " - " +contact?.location?.postcode}
+          </ContactItem>
+          <ContactItem>
+          {contact?.location?.country}
+          </ContactItem>
           </div>
-        }
-        <div>
-          {contact?.location?.city}
-        </div>
-        <div>
-         {contact?.location?.state + " - " +contact?.location?.postcode}
-        </div>
-        <div>
-         {contact?.location?.country}
-        </div>
-      </div>
+      }
+      </ContactDetails>
     </DetailsOverview>
   )
 };

@@ -51,3 +51,16 @@ export const DetailsOverview = styled.div`
   padding: 24px;
   display: flex;
 `;
+export const ContactDetails = styled.div`
+  padding: 12px;
+`;
+export const ContactItem = styled.div`
+  padding: 4px 0px;
+  font-size: 14px;
+`;
+
+export const Title = styled.div`
+  padding: 4px 0px;
+  font-size: 16px;
+  font-weight: bold;
+`;
