@@ -46,3 +46,8 @@ export const Email = styled.div`
   font-size: 14px;
   padding: 4px 0px;
 `;
+
+export const DetailsOverview = styled.div`
+  padding: 24px;
+  display: flex;
+`;

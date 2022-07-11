@@ -12,9 +12,9 @@ const Card = (props) => {
   const {
     contact,
     onDeleteContact,
-    index
+    index,
+    onClickDetails
   } = props;
-  console.log('contact', contact);
   return (
     <CardOverview>
        <>
@@ -33,7 +33,7 @@ const Card = (props) => {
           <Email>
             <a href={`mailto:${contact?.email}`}>{contact?.email}</a>
           </Email>
-          <More>
+          <More onClick={() => onClickDetails(contact)}>
             Details
           </More>
         </Description>

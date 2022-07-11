@@ -2,6 +2,7 @@ import React from 'react';
 import Card from './components/Card';
 import Header from './components/Header';
 import Modal from '../../Components/Modal';
+import Details from './components/Details';
 import ConfirmationPrompt from '../../Components/ConfirmationPrompt';
 import {
   ListOverview
@@ -13,7 +14,8 @@ class List extends React.Component {
     this.state = {
       isDeleteModal: false,
       isDetailModal: false,
-      selectedIndex: null
+      selectedIndex: null,
+      selectedContact: {}
     };
   }
 
@@ -31,6 +33,7 @@ class List extends React.Component {
                 contact={item}
                 index={index}
                 onDeleteContact={(index) => this.onDeleteContact(index)}
+                onClickDetails={(contact) => this.onClickDetails(contact)}
               />
             )
         })}
@@ -40,6 +43,10 @@ class List extends React.Component {
 
   onDeleteContact = (index) => {
     this.setState({selectedIndex:index, isDeleteModal: true})
+  }
+
+  onClickDetails = (contact) => {
+    this.setState({selectedContact:contact, isDetailModal: true})
   }
 
   onCloseDeleteModal = () => {
@@ -52,11 +59,7 @@ class List extends React.Component {
   }
 
   onCloseDetailModal = () => {
-    this.setState({isDetailModal: false})
-  }
-
-  onSubmitDetailModal = () => {
-    this.setState({isDetailModal: false})
+    this.setState({isDetailModal: false, selectedContact: {}})
   }
 
   render() {
@@ -66,7 +69,9 @@ class List extends React.Component {
     } = this.props;
 
     const {
-      isDeleteModal
+      isDeleteModal,
+      isDetailModal,
+      selectedContact
     } = this.state;
 
     if(isLoading) {
@@ -82,12 +87,19 @@ class List extends React.Component {
         <Header />
        {this.renderList(contactList)}
        <Modal 
-        onRequestClose={() => this.onCloseDeleteModal()}
+        onRequestClose={() => this.onCloseDetailModal()}
         isOpen={isDeleteModal}>
          <ConfirmationPrompt 
           message={`Are you sure you want to delete this contact?`}
           onRequestClose={() => this.onCloseDeleteModal()}
           onSubmit={() => this.onSubmitDeleteModal()}
+         />
+       </Modal>
+       <Modal 
+        onRequestClose={() => this.onCloseDetailModal()}
+        isOpen={isDetailModal}>
+         <Details
+          contact={selectedContact} 
          />
        </Modal>
       </ListOverview>
