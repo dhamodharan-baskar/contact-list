@@ -11,7 +11,7 @@ export const ListOverview = styled.div`
 export const CardOverview = styled.div`
   display: flex;
   align-items: center;
-  border: 2px solid;
+  border: 2px solid #D8D8D8;
   margin: 12px 0px;
   padding: 12px;
   border-radius: 8px;
@@ -19,8 +19,11 @@ export const CardOverview = styled.div`
   position: relative;
 `;
 
-export const Image = styled.div`
-    display: flex;
+export const More = styled.div`
+    cursor: pointer;
+    color: #7FFD4;
+    font-size: 14px;
+    padding: 4px 0px;
 `;
 
 export const Description = styled.div`
@@ -36,8 +39,10 @@ export const Delete = styled.div`
 export const Name = styled.div`
     font-size: 14px;
     font-weight: bold;
+    padding: 4px 0px;
 `;
 
 export const Email = styled.div`
   font-size: 14px;
+  padding: 4px 0px;
 `;

@@ -12,7 +12,8 @@ class List extends React.Component {
     super(props);
     this.state = {
       isDeleteModal: false,
-      isDetailModal: false
+      isDetailModal: false,
+      selectedIndex: null
     };
   }
 
@@ -38,8 +39,7 @@ class List extends React.Component {
   } 
 
   onDeleteContact = (index) => {
-    // this.props.deleteContact(index)
-    this.setState({isDeleteModal: true})
+    this.setState({selectedIndex:index, isDeleteModal: true})
   }
 
   onCloseDeleteModal = () => {
@@ -47,6 +47,7 @@ class List extends React.Component {
   }
 
   onSubmitDeleteModal = () => {
+    this.props.deleteContact(this.state.selectedIndex)
     this.setState({isDeleteModal: false})
   }
 

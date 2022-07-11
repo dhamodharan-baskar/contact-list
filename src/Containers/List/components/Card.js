@@ -1,10 +1,10 @@
 import {
   CardOverview,
-  Image,
   Description,
   Name,
   Email,
-  Delete
+  Delete,
+  More
 } from '../list.styles'
 import DeleteIcon from "../../../Icons/DeleteIcon.js"
 
@@ -14,14 +14,18 @@ const Card = (props) => {
     onDeleteContact,
     index
   } = props;
+  console.log('contact', contact);
   return (
     <CardOverview>
-       <Image>
+       <>
           <img 
             src={contact?.picture?.medium}
-            style={{borderRadius: 50}}
+            style={{
+              borderRadius: 50,
+              border:contact?.gender === 'male' ? "3px solid #ff0000" : "3px solid green"
+            }}
             alt="" />
-        </Image>
+        </>
         <Description>
           <Name>
             {`${contact?.name?.title} ${contact?.name?.first} ${contact?.name?.last}`}
@@ -29,6 +33,9 @@ const Card = (props) => {
           <Email>
             <a href={`mailto:${contact?.email}`}>{contact?.email}</a>
           </Email>
+          <More>
+            Details
+          </More>
         </Description>
         <Delete onClick={() => onDeleteContact(index)}>
          <DeleteIcon />  
