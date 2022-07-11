@@ -20,12 +20,12 @@ class List extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getContactList()
+    // this.props.getContactList();
   }
 
   renderList = (contactList) => {
     return(
-      <div>
+      <div id="list">
         {contactList.map((item, index) => {
             return(
               <Card 
@@ -40,6 +40,10 @@ class List extends React.Component {
       </div>
     )
   } 
+
+  addContact = () => {
+    this.props.onAddContact()
+  }
 
   onDeleteContact = (index) => {
     this.setState({selectedIndex:index, isDeleteModal: true})
@@ -85,8 +89,8 @@ class List extends React.Component {
     return (
       <ListOverview>
         <Header 
+         addContact={this.addContact}
          contacts={contactList}/>
-
         {this.renderList(contactList)}
 
        <Modal 

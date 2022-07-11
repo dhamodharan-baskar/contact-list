@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const ListOverview = styled.div`
-  margin: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -63,4 +62,15 @@ export const Title = styled.div`
   padding: 4px 0px;
   font-size: 16px;
   font-weight: bold;
+`;
+
+export const HeaderView = styled.div`
+  border: 1px solid;
+  width: 350px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
 `;

@@ -4,7 +4,8 @@ import {
   SORT_CONTACTS,
   FILTER_CONTACTS,
   IS_LOADING,
-  DELETE_CONTACT
+  DELETE_CONTACT,
+  ADD_CONTACT
 } from '../ActionTypes'
 import axios from 'axios'
 
@@ -17,6 +18,23 @@ export const getContactList = () => {
     })
   }
 };
+
+export const onAddContact = () => {
+  return (dispatch) => {
+    return axios.get(`https://randomuser.me/api`,).then((response) => {
+      if (response.data) {
+        dispatch(addContact(response.data));
+      }
+    })
+  }
+};
+
+export const addContact = (data) => {
+  return {
+    type: ADD_CONTACT ,
+    data
+ }
+}
 
 export const setContactList = (data) => {
   return {

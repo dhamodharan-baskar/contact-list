@@ -4,13 +4,13 @@ import {
   SORT_CONTACTS,
   FILTER_CONTACTS,
   IS_LOADING,
-  DELETE_CONTACT
+  DELETE_CONTACT,
+  ADD_CONTACT
 } from '../ActionTypes';
 
 let initialState = { 
-  isLoading: true,
+  isLoading: false,
   contactList: [],
-  listInfo: {},
   sortType: 'ascending',
   isUpdating: false
 };
@@ -21,9 +21,16 @@ export const list = (state = initialState, action) => {
       return {
         ...state,
         contactList: [...action.data.results],
-        listInfo: action.data.info,
         isLoading: false
       }
+
+    case ADD_CONTACT: 
+      console.log('action.data.results', action.data.results)
+        return {
+          ...state,
+          contactList: [...action.data.results, ...state.contactList],
+          isLoading: false
+        }
 
     case UPDATE_CONTACT: 
       return {

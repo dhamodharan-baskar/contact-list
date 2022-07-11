@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react';
 import {
-  
+  HeaderView,
+  Title
 } from '../list.styles'
 
 const Header = (props) => {
   const {
-    contacts
+    contacts,
+    addContact
   } = props
   const [countries, setCountries] = useState([])
   let count = contacts?.length
-  
+
   useEffect(() => {
     updateCountries()
   },[contacts])
@@ -25,17 +27,17 @@ const Header = (props) => {
   }
 
   return (
-    <div>
-      Contact List 
+    <HeaderView>
+      <Title>Contact List </Title>
       <div>
        No of Contacts - {count}
       </div>
       <div>
        No of countries - {countries?.length}
       </div>
-      Sort by
-      Filter by
-    </div>
+      <div onClick={() => addContact()}>Add Contact</div>
+      Sort by 
+    </HeaderView>
   )
 };
 
