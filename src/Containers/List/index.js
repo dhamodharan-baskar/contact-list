@@ -5,7 +5,8 @@ import {
   deleteContact,
   onAddContact,
   sortList,
-  setContactList
+  setContactList,
+  setLoading
 } from '../../Redux/Actions/list';
 
 const mapDispatchToProps = (dispatch) => ({
@@ -14,6 +15,7 @@ const mapDispatchToProps = (dispatch) => ({
   onAddContact: () => dispatch(onAddContact()),
   setContactList: (data) => dispatch(setContactList(data)),
   deleteContact: (index) => dispatch(deleteContact(index)),
+  setLoading: (value) => dispatch(setLoading(value))
 });
 
 const mapStateToProps = (state) => ({

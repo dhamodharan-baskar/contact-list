@@ -9,6 +9,7 @@ import {
   LoaderView
 } from './list.styles'
 import CircleLoader from "react-spinners/ClipLoader";
+import { toast } from 'react-toastify';
 
 class List extends React.Component {
   constructor(props) {
@@ -71,6 +72,17 @@ class List extends React.Component {
       contactList
     } = this.props
     localStorage.setItem('contactList', JSON.stringify(contactList))
+    toast.success('Saved successfully', {
+      position: "top-center",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'dark',
+      style: { width: '400px' },
+    })
   }
 
   sortList = () => {
