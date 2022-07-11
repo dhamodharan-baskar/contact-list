@@ -5,14 +5,17 @@ import {
   Button,
   Sort,
   Options,
-  SortButton
+  SortButton,
+  PrimaryButton,
+  Footer
 } from '../list.styles'
 
 const Header = (props) => {
   const {
     contacts,
     sortList,
-    addContact
+    addContact,
+    saveContacts
   } = props
   const [countries, setCountries] = useState([])
   let count = contacts?.length
@@ -46,11 +49,17 @@ const Header = (props) => {
         </Button>
         {contacts?.length > 1 ?
         <Sort>
-          Sort by : <SortButton onClick={() => sortList()}>Name</SortButton>
+          Sort by : <SortButton onClick={() => sortList()}> Name</SortButton>
         </Sort>
         :
         <div />}
       </Options>
+      <Footer>
+        <PrimaryButton
+          onClick={() => saveContacts()}>
+          Save Contacts
+        </PrimaryButton>
+      </Footer>
     </HeaderView>
   )
 };

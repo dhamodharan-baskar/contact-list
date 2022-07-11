@@ -76,7 +76,7 @@ export const HeaderView = styled.div`
 `;
 
 export const Button = styled.button`
-    margin: 12px;
+    margin: 4px;
     cursor: pointer;
     border: 1px solid #CFD7DF;
     border-radius: 4px;
@@ -92,9 +92,33 @@ export const Button = styled.button`
     height: 32px;
     background: linear-gradient(180deg,#FFFFFF 0%,#F3F5F7 100%);
 `
+export const PrimaryButton = styled.button`
+    margin: 4px;
+    cursor:  ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
+    border: 1px solid #CFD7DF;
+    border-radius: 4px;
+    box-shadow: 0 0 white;
+    width: auto;
+    font-weight: 600;
+    padding: 0 10px;
+    position: relative;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    opacity: 1;
+    height: 32px;
+    background: #24a0ed;
+`
 export const Options = styled.div` 
   display: flex;
   align-items: center;
+  width: 100%;
+`;
+
+export const Footer = styled.div` 
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   width: 100%;
 `;
 
@@ -105,4 +129,8 @@ export const Sort = styled.div`
 
 export const SortButton = styled.div` 
   cursor: pointer;
+`;
+
+export const LoaderView = styled.div` 
+  margin: 24px;
 `;

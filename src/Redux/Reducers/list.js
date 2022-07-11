@@ -5,7 +5,7 @@ import {
   FILTER_CONTACTS,
   IS_LOADING,
   DELETE_CONTACT,
-  ADD_CONTACT
+  ADD_CONTACT,
 } from '../ActionTypes';
 
 let initialState = { 
@@ -14,18 +14,19 @@ let initialState = {
   sortType: 'ascending',
   isUpdating: false
 };
+let contacts = [];
 
 export const list = (state = initialState, action) => {
   switch (action.type) {
+    
     case SET_CONTACT_LIST: 
       return {
         ...state,
-        contactList: [...action.data.results],
+        contactList: [...action.data],
         isLoading: false
       }
 
     case ADD_CONTACT: 
-      console.log('action.data.results', action.data.results)
         return {
           ...state,
           contactList: [...action.data.results, ...state.contactList],
@@ -37,9 +38,23 @@ export const list = (state = initialState, action) => {
         ...state
       }
 
-    case SORT_CONTACTS: 
+    case SORT_CONTACTS:
+      function compare(a, b) {
+        if(action.isAscending){
+          if (a.name.first > b.name.first) return 1;
+          if (a.name.first < b.name.first) return -1;
+          return 0;
+        } else {
+          if (a.name.first < b.name.first) return 1;
+          if (a.name.first > b.name.first) return -1;
+          return 0;
+        }
+      }
+      contacts = [...state.contactList];
+      contacts.sort(compare);
       return {
-        ...state
+        ...state,
+        contactList: [...contacts],
       }
 
     case FILTER_CONTACTS: 
@@ -53,11 +68,11 @@ export const list = (state = initialState, action) => {
         isLoading: action.value
       }
       
-    case DELETE_CONTACT:
-      let list = state.contactList.filter((item, index) => index !== action.index)
+    case DELETE_CONTACT:    
+      contacts = state.contactList.filter((item, index) => index !== action.index)
       return {
         ...state,
-        contactList: [...list],
+        contactList: [...contacts],
       }
 
     default:

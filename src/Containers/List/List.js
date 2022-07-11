@@ -5,8 +5,10 @@ import Modal from '../../Components/Modal';
 import Details from './components/Details';
 import ConfirmationPrompt from '../../Components/ConfirmationPrompt';
 import {
-  ListOverview
+  ListOverview,
+  LoaderView
 } from './list.styles'
+import CircleLoader from "react-spinners/ClipLoader";
 
 class List extends React.Component {
   constructor(props) {
@@ -16,15 +18,33 @@ class List extends React.Component {
       isDetailModal: false,
       selectedIndex: null,
       selectedContact: {},
-      isAscending: true
+      isAscending: false
     };
   }
 
   componentDidMount() {
+    if(localStorage.getItem('contactList')){
+      let list = JSON.parse(localStorage.getItem('contactList'))
+      this.props.setContactList(list)
+    }
     // this.props.getContactList();
   }
 
   renderList = (contactList) => {
+    const {
+      isLoading
+    } = this.props;
+
+    if(isLoading) {
+      return(
+        <LoaderView>
+            <CircleLoader
+              size={36}
+              color={'#aacbe9'}
+            />
+        </LoaderView>
+      )
+    }
     return(
       <div id="list">
         {contactList.map((item, index) => {
@@ -46,9 +66,15 @@ class List extends React.Component {
     this.props.onAddContact()
   }
 
+  saveContacts = () => {
+    const {
+      contactList
+    } = this.props
+    localStorage.setItem('contactList', JSON.stringify(contactList))
+  }
+
   sortList = () => {
-    console.log('coming')
-    this.setState({isAscending: !this.state.isAscending})
+    this.setState({isAscending: !this.state.isAscending}, () => this.props.sortList(this.state.isAscending))
   }
 
   onDeleteContact = (index) => {
@@ -74,7 +100,6 @@ class List extends React.Component {
 
   render() {
     const{
-     isLoading,
      contactList
     } = this.props;
 
@@ -83,20 +108,13 @@ class List extends React.Component {
       isDetailModal,
       selectedContact
     } = this.state;
-
-    if(isLoading) {
-      return(
-        <ListOverview>
-          loading
-        </ListOverview>
-      )
-    }
-
+  
     return (
       <ListOverview>
         <Header 
          addContact={this.addContact}
          sortList={this.sortList}
+         saveContacts={this.saveContacts}
          contacts={contactList}/>
         {this.renderList(contactList)}
 

@@ -4,13 +4,15 @@ import {
   getContactList,
   deleteContact,
   onAddContact,
-  sortList
+  sortList,
+  setContactList
 } from '../../Redux/Actions/list';
 
 const mapDispatchToProps = (dispatch) => ({
   getContactList: () => dispatch(getContactList()),
   sortList: (isAscending) => dispatch(sortList(isAscending)),
   onAddContact: () => dispatch(onAddContact()),
+  setContactList: (data) => dispatch(setContactList(data)),
   deleteContact: (index) => dispatch(deleteContact(index)),
 });
 

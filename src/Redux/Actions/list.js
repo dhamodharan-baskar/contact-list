@@ -6,7 +6,6 @@ import {
   IS_LOADING,
   DELETE_CONTACT,
   ADD_CONTACT,
-  SORT_LIST
 } from '../ActionTypes'
 import axios from 'axios'
 
@@ -22,6 +21,7 @@ export const getContactList = () => {
 
 export const onAddContact = () => {
   return (dispatch) => {
+    dispatch(setLoading(true));
     return axios.get(`https://randomuser.me/api`,).then((response) => {
       if (response.data) {
         dispatch(addContact(response.data));
@@ -32,7 +32,7 @@ export const onAddContact = () => {
 
 export const sortList = (isAscending) => {
   return {
-    type: SORT_LIST ,
+    type: SORT_CONTACTS ,
     isAscending
  }
 }
@@ -51,9 +51,10 @@ export const setContactList = (data) => {
   }
 };
 
-export const setLoading = () => {
+export const setLoading = (value) => {
   return {
-      type: IS_LOADING
+      type: IS_LOADING,
+      value
   }
 };
 
