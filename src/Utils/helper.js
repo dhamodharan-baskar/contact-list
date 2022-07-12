@@ -107,3 +107,18 @@ export const setDate = (contact, event) => {
   }
   return data;
 }
+
+export const upLoadImage = (contact, e) => {
+  let data = {...contact}
+	console.log('URL.createObjectURL(e.target.files[0])', URL.createObjectURL(e.target.files[0]))
+  data = {
+    ...contact,
+    picture: {
+      ...contact.picture,
+      large: URL.createObjectURL(e.target.files[0]),
+			medium: URL.createObjectURL(e.target.files[0]),
+			thumbnail: URL.createObjectURL(e.target.files[0]) 
+    }
+  }
+  return data;
+}

@@ -3,14 +3,16 @@ import EditMode from './EditMode'
 import ViewMode from './ViewMode'
 import {
   setContactData,
-  setDate
+  setDate,
+	upLoadImage
 } from '../../../Utils/helper'
 import {
   DetailsOverview,
   ContactDetails,
   Button,
   PrimaryButton,
-	FooterOption
+	FooterOption,
+	ImageUpload
 } from '../list.styles'
 
 const Details = (props) => {
@@ -31,17 +33,38 @@ const Details = (props) => {
     setContact({...data})
   },[contactData])
 
+	const onImageChange = (e) => {
+		let data = upLoadImage(contactData, e)
+    setContact({...data})
+	}
+
+	const onClickImage = () => {
+		if(editMode)
+			document.getElementById('files').click()
+	}
+
   return (
     <DetailsOverview>
-      <div>
-        <img 
-          src={contact?.picture?.large}
+      <ImageUpload>
+				<img 
+          src={contactData?.picture?.large}
+					onClick={onClickImage}
           style={{
             borderRadius: 75,
+						width: 125,
+						height: 125,
+						cursor: 'pointer',
             border:contact?.gender === 'male' ? "3px solid #ff0000" : "3px solid green"
           }}
           alt="" />
-      </div>
+				<input 
+					type="file"
+					id="files" 
+					multiple accept="image/*" 
+					name="files[]" 
+					style={{display: 'none', width: 150}}
+					onChange={onImageChange} />
+      </ImageUpload>
       <ContactDetails>
       {editMode ?
         <EditMode 

@@ -22,6 +22,8 @@ const Card = (props) => {
             src={contact?.picture?.medium}
             style={{
               borderRadius: 50,
+              height: 75,
+              width: 75,
               border:contact?.gender === 'male' ? "3px solid #ff0000" : "3px solid green"
             }}
             alt="" />
