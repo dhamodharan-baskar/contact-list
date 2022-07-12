@@ -232,8 +232,16 @@ class List extends React.Component {
          saveContacts={this.saveContacts}
          onClearAll={this.onClearAll}
          contacts={contactList}/>
-        {this.renderList(contactList)}
-
+         {
+           contactList?.length ? 
+           <>
+            {this.renderList(contactList)}
+           </>
+           :
+           <>
+            Add contacts to view the list
+           </>
+         }
        <Modal 
         onRequestClose={() => this.onCloseDetailModal()}
         isOpen={isDeleteModal}>

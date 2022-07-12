@@ -53,12 +53,20 @@ const Header = (props) => {
   return (
     <HeaderView>
       <Title>Contact List </Title>
-      <Label>
-       No of Contacts - {count}
-      </Label>
-      <Label>
-       No of countries - {countries?.length}
-      </Label>
+      {contacts?.length ? 
+       <Label>
+        No of Contacts - {count}
+       </Label>
+       :
+       <div />
+      }
+      {contacts?.length ? 
+       <Label>
+        No of countries - {countries?.length}
+       </Label>
+       :
+       <div />
+      }
       <Options>
         <Button onClick={() => addContact()}>
           Add Contact
