@@ -12,10 +12,10 @@ export const history = createBrowserHistory();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <Provider store={store}>
-        <ToastContainer />
-        <App history={history}/>
-    </Provider>
+<Provider store={store}>
+    <ToastContainer />
+    <App history={history}/>
+</Provider>
 );
 
 reportWebVitals();

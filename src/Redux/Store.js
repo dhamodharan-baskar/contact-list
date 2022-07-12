@@ -7,7 +7,7 @@ import reducers from './Reducers';
 const middleware = [thunk];
 const thunkMiddleware = applyMiddleware(...middleware);
 const store = createStore(reducers, composeWithDevTools(
-    thunkMiddleware
+thunkMiddleware
 ));
 
 export default store;
