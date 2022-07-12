@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export const setContactData = (contact, event) => {
   let data = {...contact}
   if(event.target.id === 'firstName'){
@@ -43,10 +45,6 @@ export const setContactData = (contact, event) => {
     }
   }
   if(event.target.id === 'streetName'){
-      let street = {
-        ...data.location.street,
-        name: event.target.value
-      }
       data = {
         ...data,
         location: {
@@ -95,4 +93,17 @@ export const setContactData = (contact, event) => {
     }
   }
   return data
+}
+
+export const setDate = (contact, event) => {
+  let data = {...contact}
+  data = {
+    ...contact,
+    dob: {
+      ...contact.dob,
+      date: event,
+      age: moment().diff(moment(event, "DD-MM-YYYY"), 'years')
+    }
+  }
+  return data;
 }

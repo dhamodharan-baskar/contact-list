@@ -19,16 +19,18 @@ class List extends React.Component {
       isDetailModal: false,
       selectedIndex: null,
       selectedContact: {},
-      isAscending: false
+      isAscending: false,
+      isDeleteAllModal: false
     };
   }
 
   componentDidMount() {
     if(localStorage.getItem('contactList')){
       let list = JSON.parse(localStorage.getItem('contactList'))
-      this.props.setContactList(list)
+      if(list){
+        this.props.setContactList(list)
+      }
     }
-    // this.props.getContactList();
   }
 
   renderList = (contactList) => {
@@ -72,18 +74,9 @@ class List extends React.Component {
       contactList
     } = this.props
     localStorage.setItem('contactList', JSON.stringify(contactList))
-    toast.success('Saved successfully', {
-      position: "top-center",
-      autoClose: 1000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: 'dark',
-      style: { width: '400px' },
-    })
+    this.renderToast('Saved successfully');
   }
+
   onSaveContact = (contact) => {
     this.props.saveContact(contact, this.state.selectedIndex)
     this.setState({
@@ -91,17 +84,7 @@ class List extends React.Component {
       isDetailModal: false,
       selectedIndex: null
     })
-    toast.success('Edited successfully', {
-      position: "top-center",
-      autoClose: 1000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: 'dark',
-      style: { width: '400px' },
-    })
+    this.renderToast('Edited successfully');
   }
 
   sortList = () => {
@@ -142,6 +125,35 @@ class List extends React.Component {
     })
   }
 
+  onClearAll = () => {
+    this.setState({isDeleteAllModal: true})
+  }
+
+  onCloseDeleteAll = () => {
+    this.setState({isDeleteAllModal: false})
+  }
+
+  onSubmitDeleteAll = () => {
+    localStorage.setItem('contactList', null)
+    this.props.setContactList([])
+    this.renderToast('Cleared all contacts');
+    this.setState({isDeleteAllModal: false})
+  }
+
+  renderToast = (message) => {
+    toast.success(message, {
+      position: "top-center",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'dark',
+      style: { width: '400px' },
+    })
+  }
+
   render() {
     const{
      contactList
@@ -150,7 +162,8 @@ class List extends React.Component {
     const {
       isDeleteModal,
       isDetailModal,
-      selectedContact
+      selectedContact,
+      isDeleteAllModal
     } = this.state;
   
     return (
@@ -159,6 +172,7 @@ class List extends React.Component {
          addContact={this.addContact}
          sortList={this.sortList}
          saveContacts={this.saveContacts}
+         onClearAll={this.onClearAll}
          contacts={contactList}/>
         {this.renderList(contactList)}
 
@@ -169,6 +183,16 @@ class List extends React.Component {
           message={`Are you sure you want to delete this contact?`}
           onRequestClose={() => this.onCloseDeleteModal()}
           onSubmit={() => this.onSubmitDeleteModal()}
+         />
+       </Modal>
+
+       <Modal 
+        onRequestClose={() => this.onCloseDeleteAll()}
+        isOpen={isDeleteAllModal}>
+         <ConfirmationPrompt 
+          message={`Are you sure you want to delete all contacts?`}
+          onRequestClose={() => this.onCloseDeleteAll()}
+          onSubmit={() => this.onSubmitDeleteAll()}
          />
        </Modal>
 

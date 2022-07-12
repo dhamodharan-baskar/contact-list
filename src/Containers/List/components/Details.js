@@ -1,8 +1,10 @@
 import { useState, useCallback } from 'react';
-import moment from 'moment';
 import EditMode from './EditMode'
 import ViewMode from './ViewMode'
-import {setContactData} from '../../../Utils/helper'
+import {
+  setContactData,
+  setDate
+} from '../../../Utils/helper'
 import {
   DetailsOverview,
   ContactDetails,
@@ -24,8 +26,8 @@ const Details = (props) => {
   },[contactData])
 
   const onChangeDate = useCallback((e) => {
-    // let data = setContactData(contactData, e)
-    // setContact({...data})
+    let data = setDate(contactData, e)
+    setContact({...data})
   },[contactData])
 
   return (

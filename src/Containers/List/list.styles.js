@@ -109,6 +109,24 @@ export const PrimaryButton = styled.button`
     height: 32px;
     background: #24a0ed;
 `
+export const DeleteButton = styled.button`
+    border: 1px solid #C82124;
+    border-radius: 4px;
+    width: auto;
+    font-weight: 600;
+    padding: 0 10px;
+    position: relative;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 14px;
+    opacity: 1;
+    cursor: pointer;
+    height: 32px;
+    background: linear-gradient(
+    180deg
+    ,#D72D30 0%,#C82124 100%);
+`
+
 export const Options = styled.div` 
   display: flex;
   align-items: center;
@@ -129,6 +147,10 @@ export const Sort = styled.div`
 
 export const SortButton = styled.div` 
   cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const LoaderView = styled.div` 

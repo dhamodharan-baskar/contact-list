@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import SortIcon from "../../../Icons/SortIcon.js"
 import {
   HeaderView,
   Title,
@@ -7,7 +8,8 @@ import {
   Options,
   SortButton,
   PrimaryButton,
-  Footer
+  Footer,
+  DeleteButton,
 } from '../list.styles'
 
 const Header = (props) => {
@@ -15,7 +17,8 @@ const Header = (props) => {
     contacts,
     sortList,
     addContact,
-    saveContacts
+    saveContacts,
+    onClearAll
   } = props
   const [countries, setCountries] = useState([])
   let count = contacts?.length
@@ -49,12 +52,17 @@ const Header = (props) => {
         </Button>
         {contacts?.length > 1 ?
         <Sort>
-          Sort by : <SortButton onClick={() => sortList()}> Name</SortButton>
+          <SortButton onClick={() => sortList()}>
+            Name <SortIcon />
+          </SortButton>
         </Sort>
         :
         <div />}
       </Options>
       <Footer>
+        <DeleteButton onClick={() => onClearAll()}>
+          Clear
+        </DeleteButton>
         <PrimaryButton
           onClick={() => saveContacts()}>
           Save Contacts
