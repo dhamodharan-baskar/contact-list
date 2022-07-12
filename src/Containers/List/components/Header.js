@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react';
 import SortIcon from "../../../Icons/SortIcon.js"
+import { 
+  FILTER_OPTIONS,
+  DROPDOWN_CUSTOM_STYLE 
+} from "../../../Constants/constant"
+import Select from 'react-select';
 import {
   HeaderView,
   Title,
@@ -10,6 +15,8 @@ import {
   PrimaryButton,
   Footer,
   DeleteButton,
+  Filter,
+  Label
 } from '../list.styles'
 
 const Header = (props) => {
@@ -18,14 +25,12 @@ const Header = (props) => {
     sortList,
     addContact,
     saveContacts,
-    onClearAll
+    onClearAll,
+    filterType,
+    filterContacts
   } = props
   const [countries, setCountries] = useState([])
   let count = contacts?.length
-
-  useEffect(() => {
-    updateCountries()
-  },[contacts])
 
   const updateCountries = () => {
     let list = [];
@@ -37,21 +42,39 @@ const Header = (props) => {
     setCountries(list)
   }
 
+  useEffect(() => {
+    updateCountries()
+  },[contacts])
+
+  const onSelectFilter = (event) => {
+    filterContacts(event.type)
+  }
+
   return (
     <HeaderView>
       <Title>Contact List </Title>
-      <div>
+      <Label>
        No of Contacts - {count}
-      </div>
-      <div>
+      </Label>
+      <Label>
        No of countries - {countries?.length}
-      </div>
+      </Label>
       <Options>
         <Button onClick={() => addContact()}>
           Add Contact
         </Button>
         {contacts?.length > 1 ?
         <Sort>
+          <Filter>
+           <Select 
+            value={FILTER_OPTIONS?.find(obj => obj['type'] === filterType)}
+            styles={DROPDOWN_CUSTOM_STYLE}
+            options={FILTER_OPTIONS}
+            onChange={(event) => onSelectFilter(event)}
+            getOptionLabel={(options) => options['name']}
+            getOptionValue={(options) => options['type']}
+           />
+          </Filter>
           <SortButton onClick={() => sortList()}>
             Name <SortIcon />
           </SortButton>

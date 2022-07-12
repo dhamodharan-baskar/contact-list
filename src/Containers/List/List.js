@@ -33,38 +33,6 @@ class List extends React.Component {
     }
   }
 
-  renderList = (contactList) => {
-    const {
-      isLoading
-    } = this.props;
-
-    if(isLoading) {
-      return(
-        <LoaderView>
-            <CircleLoader
-              size={36}
-              color={'#aacbe9'}
-            />
-        </LoaderView>
-      )
-    }
-    return(
-      <div id="list">
-        {contactList.map((item, index) => {
-            return(
-              <Card 
-                key={`contact${index}`}
-                contact={item}
-                index={index}
-                onDeleteContact={(index) => this.onDeleteContact(index)}
-                onClickDetails={(contact, index) => this.onClickDetails(contact, index)}
-              />
-            )
-        })}
-      </div>
-    )
-  } 
-
   addContact = () => {
     this.props.onAddContact()
   }
@@ -154,9 +122,61 @@ class List extends React.Component {
     })
   }
 
+  renderList = (contactList) => {
+    const {
+      isLoading,
+      filterType
+    } = this.props;
+    console.log('filterType', filterType)
+    if(isLoading) {
+      return(
+        <LoaderView>
+            <CircleLoader
+              size={36}
+              color={'#aacbe9'}
+            />
+        </LoaderView>
+      )
+    }
+    if(filterType === 'all'){
+      return(
+        <div id="list">
+          {contactList.map((item, index) => {
+              return(
+                <Card 
+                  key={`contact${index}`}
+                  contact={item}
+                  index={index}
+                  onDeleteContact={(index) => this.onDeleteContact(index)}
+                  onClickDetails={(contact, index) => this.onClickDetails(contact, index)}
+                />
+              )
+          })}
+        </div>
+      )
+    }
+    return(
+        <div id="list">
+          {contactList.filter(item => item.gender === filterType).map((item, index) => {
+              return(
+                <Card 
+                  key={`contact${index}`}
+                  contact={item}
+                  index={index}
+                  onDeleteContact={(index) => this.onDeleteContact(index)}
+                  onClickDetails={(contact, index) => this.onClickDetails(contact, index)}
+                />
+              )
+          })}
+        </div>
+      )
+  }
+
   render() {
     const{
-     contactList
+     contactList,
+     filterType,
+     filterContacts
     } = this.props;
 
     const {
@@ -165,12 +185,14 @@ class List extends React.Component {
       selectedContact,
       isDeleteAllModal
     } = this.state;
-  
+
     return (
       <ListOverview>
         <Header 
          addContact={this.addContact}
          sortList={this.sortList}
+         filterType={filterType}
+         filterContacts={filterContacts}
          saveContacts={this.saveContacts}
          onClearAll={this.onClearAll}
          contacts={contactList}/>

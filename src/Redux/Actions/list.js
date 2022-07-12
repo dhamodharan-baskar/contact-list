@@ -65,9 +65,10 @@ export const updateContact = () => {
   }
 };
 
-export const filterContacts = () => {
+export const filterContacts = (filterType) => {
   return {
-      type: FILTER_CONTACTS
+      type: FILTER_CONTACTS,
+      filterType
   }
 };
 

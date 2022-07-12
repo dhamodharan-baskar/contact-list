@@ -13,6 +13,7 @@ let initialState = {
   isLoading: false,
   contactList: [],
   sortType: 'ascending',
+  filterType: 'all',
   isUpdating: false
 };
 let contacts = [];
@@ -60,7 +61,8 @@ export const list = (state = initialState, action) => {
 
     case FILTER_CONTACTS: 
       return {
-        ...state
+        ...state,
+        filterType: action.filterType
       }
       
     case IS_LOADING: 

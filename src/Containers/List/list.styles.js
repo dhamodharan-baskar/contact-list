@@ -146,8 +146,9 @@ export const Footer = styled.div`
 `;
 
 export const Sort = styled.div` 
-  margin-left: auto;
   display: flex;
+  margin: 8px 0px;
+  margin-left: auto;
 `;
 
 export const SortButton = styled.div` 
@@ -169,4 +170,11 @@ export const ImageUpload = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
+export const Filter = styled.div` 
+  margin-right: 8px;
+`;
+export const Label = styled.div` 
+  color: #000;
+  font-size: 14px;
+  margin: 4px;
+`;
