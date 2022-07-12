@@ -9,7 +9,8 @@ import {
   DetailsOverview,
   ContactDetails,
   Button,
-  PrimaryButton
+  PrimaryButton,
+	FooterOption
 } from '../list.styles'
 
 const Details = (props) => {
@@ -57,14 +58,14 @@ const Details = (props) => {
           contact={contact}
         />
       } 
-      <div>
+      <FooterOption>
        <Button onClick={() => setEditMode(!editMode)}>
           Edit
         </Button>
         <PrimaryButton onClick={() => onSaveContact(contactData)}>
           Save
         </PrimaryButton>
-      </div>
+      </FooterOption>
       </ContactDetails>
     </DetailsOverview>
   )

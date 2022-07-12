@@ -51,15 +51,19 @@ export const DetailsOverview = styled.div`
   display: flex;
 `;
 export const ContactDetails = styled.div`
-  padding: 0px 16px;
+  padding: 0px 8px;
 `;
 export const ContactItem = styled.div`
-  padding: 4px 0px;
   font-size: 14px;
+  display: flex;
+  padding: 4px;
 `;
-
+export const Item = styled.div`
+  width: 100%;
+  margin: 0px 8px;
+`;
 export const Title = styled.div`
-  padding: 4px 0px;
+  padding: 4px;
   font-size: 16px;
   font-weight: bold;
 `;
@@ -155,4 +159,8 @@ export const SortButton = styled.div`
 
 export const LoaderView = styled.div` 
   margin: 24px;
+`;
+export const FooterOption = styled.div` 
+  display: flex;
+  justify-content: flex-end;
 `;
