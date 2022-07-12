@@ -12,7 +12,8 @@ import {
 
 const Details = (props) => {
   const {
-    contact
+    contact,
+    onSaveContact
   } = props
   const [contactData , setContact] = useState(contact)
   const [editMode, setEditMode] = useState(false)
@@ -20,7 +21,12 @@ const Details = (props) => {
   const onEditContact = useCallback((e) => {
     let data = setContactData(contactData, e)
     setContact({...data})
-  },[])
+  },[contactData])
+
+  const onChangeDate = useCallback((e) => {
+    // let data = setContactData(contactData, e)
+    // setContact({...data})
+  },[contactData])
 
   return (
     <DetailsOverview>
@@ -42,6 +48,7 @@ const Details = (props) => {
           cell={contactData?.cell}
           email={contactData?.email}
           onEditContact={(e) => onEditContact(e)}
+          onChangeDate={(e) => onChangeDate(e)}
         />
         :
         <ViewMode 
@@ -52,7 +59,7 @@ const Details = (props) => {
        <Button onClick={() => setEditMode(!editMode)}>
           Edit
         </Button>
-        <PrimaryButton>
+        <PrimaryButton onClick={() => onSaveContact(contactData)}>
           Save
         </PrimaryButton>
       </div>

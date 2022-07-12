@@ -55,7 +55,7 @@ class List extends React.Component {
                 contact={item}
                 index={index}
                 onDeleteContact={(index) => this.onDeleteContact(index)}
-                onClickDetails={(contact) => this.onClickDetails(contact)}
+                onClickDetails={(contact, index) => this.onClickDetails(contact, index)}
               />
             )
         })}
@@ -84,21 +84,49 @@ class List extends React.Component {
       style: { width: '400px' },
     })
   }
+  onSaveContact = (contact) => {
+    this.props.saveContact(contact, this.state.selectedIndex)
+    this.setState({
+      selectedContact:{}, 
+      isDetailModal: false,
+      selectedIndex: null
+    })
+    toast.success('Edited successfully', {
+      position: "top-center",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'dark',
+      style: { width: '400px' },
+    })
+  }
 
   sortList = () => {
-    this.setState({isAscending: !this.state.isAscending}, () => this.props.sortList(this.state.isAscending))
+    this.setState({
+      isAscending: !this.state.isAscending
+    }, () => this.props.sortList(this.state.isAscending))
   }
 
   onDeleteContact = (index) => {
     this.setState({selectedIndex:index, isDeleteModal: true})
   }
 
-  onClickDetails = (contact) => {
-    this.setState({selectedContact:contact, isDetailModal: true})
+  onClickDetails = (contact, index) => {
+    this.setState({
+      selectedContact:contact, 
+      isDetailModal: true,
+      selectedIndex: index
+    })
   }
 
   onCloseDeleteModal = () => {
-    this.setState({isDeleteModal: false})
+    this.setState({
+      isDeleteModal: false,
+      selectedIndex: null
+    })
   }
 
   onSubmitDeleteModal = () => {
@@ -107,7 +135,11 @@ class List extends React.Component {
   }
 
   onCloseDetailModal = () => {
-    this.setState({isDetailModal: false, selectedContact: {}})
+    this.setState({
+      isDetailModal: false, 
+      selectedContact: {},
+      selectedIndex: null
+    })
   }
 
   render() {
@@ -144,6 +176,7 @@ class List extends React.Component {
         onRequestClose={() => this.onCloseDetailModal()}
         isOpen={isDetailModal}>
          <Details
+          onSaveContact={this.onSaveContact}
           contact={selectedContact} 
          />
        </Modal>

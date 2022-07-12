@@ -6,6 +6,7 @@ import {
   IS_LOADING,
   DELETE_CONTACT,
   ADD_CONTACT,
+  SAVE_CONTACT
 } from '../ActionTypes';
 
 let initialState = { 
@@ -75,6 +76,14 @@ export const list = (state = initialState, action) => {
         contactList: [...contacts],
       }
 
+    case SAVE_CONTACT:    
+      contacts = state.contactList
+      contacts[action.index] = action.contact
+      return {
+        ...state,
+        contactList: [...contacts],
+      }
+      
     default:
       return state;
   } 

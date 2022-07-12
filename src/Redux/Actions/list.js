@@ -6,6 +6,7 @@ import {
   IS_LOADING,
   DELETE_CONTACT,
   ADD_CONTACT,
+  SAVE_CONTACT
 } from '../ActionTypes'
 import axios from 'axios'
 
@@ -79,6 +80,14 @@ export const sortContacts = () => {
 export const deleteContact = (index) => {
   return {
       type: DELETE_CONTACT,
+      index
+  }
+};
+
+export const saveContact = (contact, index) => {
+  return {
+      type: SAVE_CONTACT,
+      contact,
       index
   }
 };

@@ -6,11 +6,13 @@ import {
   onAddContact,
   sortList,
   setContactList,
-  setLoading
+  setLoading,
+  saveContact
 } from '../../Redux/Actions/list';
 
 const mapDispatchToProps = (dispatch) => ({
   getContactList: () => dispatch(getContactList()),
+  saveContact:(contact, index) => dispatch(saveContact(contact, index)),
   sortList: (isAscending) => dispatch(sortList(isAscending)),
   onAddContact: () => dispatch(onAddContact()),
   setContactList: (data) => dispatch(setContactList(data)),

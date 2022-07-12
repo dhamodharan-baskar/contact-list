@@ -33,7 +33,7 @@ const Card = (props) => {
           <Email>
             <a href={`mailto:${contact?.email}`}>{contact?.email}</a>
           </Email>
-          <More onClick={() => onClickDetails(contact)}>
+          <More onClick={() => onClickDetails(contact, index)}>
             Details
           </More>
         </Description>

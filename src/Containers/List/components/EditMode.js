@@ -14,19 +14,9 @@ const EditMode = (props) => {
     email,
     location,
     name,
-    onEditContact
+    onEditContact,
+    onChangeDate
   } = props
-
-  const onChangeDate = (date) => {
-    // let data = {
-    //   ...contactData,
-    //   dob: {
-    //     ...contactData.dob,
-    //     date: moment(date).format()
-    //   }
-    // }
-    // setContact({...data})
-  }
 
   return (
     <>
@@ -42,6 +32,7 @@ const EditMode = (props) => {
       </ContactItem>
       <ContactItem>
         <DatePicker 
+           dateFormat="dd-MM-yyyy"
            selected={new Date(dob?.date)}
            onChange={(date) => onChangeDate(date)} />
       </ContactItem>
