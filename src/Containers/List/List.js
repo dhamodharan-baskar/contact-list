@@ -145,7 +145,7 @@ class List extends React.Component {
 
   renderToast = (message) => {
     toast.success(message, {
-      position: "top-center",
+      position: "top-right",
       autoClose: 1000,
       hideProgressBar: false,
       closeOnClick: true,
@@ -153,7 +153,7 @@ class List extends React.Component {
       draggable: true,
       progress: undefined,
       theme: 'dark',
-      style: { width: '400px' },
+      style: { width: '300px' },
     })
   }
 

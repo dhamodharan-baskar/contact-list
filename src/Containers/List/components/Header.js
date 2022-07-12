@@ -67,10 +67,10 @@ const Header = (props) => {
        :
        <div />
       }
-      <Options>
-        <Button onClick={() => addContact()}>
+       <Button onClick={() => addContact()}>
           Add Contact
         </Button>
+      <Options>
         {contacts?.length > 1 ?
         <Sort>
           <Filter>
@@ -90,6 +90,7 @@ const Header = (props) => {
         :
         <div />}
       </Options>
+      {contacts?.length ? 
       <Footer>
         <DeleteButton onClick={() => onClearAll()}>
           Clear
@@ -99,6 +100,9 @@ const Header = (props) => {
           Save Contacts
         </PrimaryButton>
       </Footer>
+      :
+      <div />
+      }
     </HeaderView>
   )
 };
