@@ -17,6 +17,10 @@ export const CardOverview = styled.div`
   border-radius: 8px;
   width: 350px;
   position: relative;
+  @media screen and (max-width: 900px) {
+    display: block;
+    width: 250px;
+  }
 `;
 
 export const More = styled.div`
@@ -34,6 +38,7 @@ export const Delete = styled.div`
   cursor: pointer;
   position: absolute;
   right: 8px;
+  top: 12px;
 `;
 
 export const Name = styled.div`
@@ -51,18 +56,22 @@ export const DetailsOverview = styled.div`
   padding: 24px;
   display: flex;
 `;
+
 export const ContactDetails = styled.div`
   padding: 0px 8px;
 `;
+
 export const ContactItem = styled.div`
   font-size: 14px;
   display: flex;
   padding: 4px;
 `;
+
 export const Item = styled.div`
   width: 100%;
   margin: 0px 8px;
 `;
+
 export const Title = styled.div`
   padding: 4px;
   font-size: 16px;
@@ -72,12 +81,16 @@ export const Title = styled.div`
 export const HeaderView = styled.div`
   border: 2px solid #D8D8D8;
   width: 350px;
+  margin: 12px 0px;
   padding: 12px;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;
+  @media screen and (max-width: 900px) {
+    width: 250px;
+  }
 `;
 
 export const Button = styled.button`
@@ -136,6 +149,10 @@ export const Options = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+    margin: 8px;
+  }
 `;
 
 export const Footer = styled.div` 
@@ -149,6 +166,9 @@ export const Sort = styled.div`
   display: flex;
   margin: 8px 0px;
   margin-left: auto;
+  @media screen and (max-width: 900px) {
+    justify-content: flex-end;
+  }
 `;
 
 export const SortButton = styled.div` 
@@ -157,6 +177,7 @@ export const SortButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right: 8px;
 `;
 
 export const LoaderView = styled.div` 
@@ -171,7 +192,7 @@ export const ImageUpload = styled.div`
   flex-direction: column;
 `;
 export const Filter = styled.div` 
-  margin-right: 8px;
+  margin-right: 12px;
 `;
 export const Label = styled.div` 
   color: #000;
