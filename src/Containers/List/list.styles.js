@@ -55,6 +55,10 @@ export const Email = styled.div`
 export const DetailsOverview = styled.div`
   padding: 24px;
   display: flex;
+  @media screen and (max-width: 900px) {
+    display: block;
+    width: auto;
+  }
 `;
 
 export const ContactDetails = styled.div`
@@ -189,8 +193,12 @@ export const FooterOption = styled.div`
   justify-content: flex-end;
 `;
 export const ImageUpload = styled.div` 
-  display: flex;
-  flex-direction: column;
+  @media screen and (max-width: 900px) {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+  }
 `;
 export const Filter = styled.div` 
   margin-right: 12px;
