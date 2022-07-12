@@ -8,6 +8,9 @@ import {
   ListOverview,
   LoaderView
 } from './list.styles'
+import {
+  contactValidation
+} from '../../Constants/constant'
 import CircleLoader from "react-spinners/ClipLoader";
 import { toast } from 'react-toastify';
 
@@ -20,7 +23,8 @@ class List extends React.Component {
       selectedIndex: null,
       selectedContact: {},
       isAscending: false,
-      isDeleteAllModal: false
+      isDeleteAllModal: false,
+      isValidated: true
     };
   }
 
@@ -45,14 +49,44 @@ class List extends React.Component {
     this.renderToast('Saved successfully');
   }
 
-  onSaveContact = (contact) => {
-    this.props.saveContact(contact, this.state.selectedIndex)
-    this.setState({
-      selectedContact:{}, 
-      isDetailModal: false,
-      selectedIndex: null
+  onSaveContact = async (contact) => {
+    let isValidated = await this.checkValidation(contact);
+    if(isValidated){
+      this.props.saveContact(contact, this.state.selectedIndex)
+      this.setState({
+        selectedContact:{}, 
+        isDetailModal: false,
+        selectedIndex: null,
+        isValidated:true
+      })
+      this.renderToast('Edited successfully');
+      this.setState({isValidated: true})
+    } else {
+      this.setState({isValidated: false})
+    }
+  }
+
+  checkValidation = (contact) => {
+    let validated = true;
+    Object.keys(contactValidation).forEach((key) => { 
+      if(!contact[key]){
+        validated = false
+      }
+      if(typeof contact[key] === 'object' && !Array.isArray(contact[key])){
+          let obj = contactValidation[key];
+          Object.keys(obj).forEach((childKey) => {  
+            if(!contact[key][childKey]){
+              validated = false
+            }
+            if(childKey === 'street'){
+              if(!contact[key][childKey]['number'] || !contact[key][childKey]['name']){
+                validated = false
+              }
+            }
+          }) 
+      }
     })
-    this.renderToast('Edited successfully');
+    return validated
   }
 
   sortList = () => {
@@ -89,7 +123,8 @@ class List extends React.Component {
     this.setState({
       isDetailModal: false, 
       selectedContact: {},
-      selectedIndex: null
+      selectedIndex: null,
+      isValidated: true
     })
   }
 
@@ -127,7 +162,7 @@ class List extends React.Component {
       isLoading,
       filterType
     } = this.props;
-    console.log('filterType', filterType)
+
     if(isLoading) {
       return(
         <LoaderView>
@@ -183,7 +218,8 @@ class List extends React.Component {
       isDeleteModal,
       isDetailModal,
       selectedContact,
-      isDeleteAllModal
+      isDeleteAllModal,
+      isValidated
     } = this.state;
 
     return (
@@ -222,6 +258,7 @@ class List extends React.Component {
         onRequestClose={() => this.onCloseDetailModal()}
         isOpen={isDetailModal}>
          <Details
+          isValidated={isValidated}
           onSaveContact={this.onSaveContact}
           contact={selectedContact} 
          />

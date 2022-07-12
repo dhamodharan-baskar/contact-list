@@ -15,11 +15,11 @@ export const CardOverview = styled.div`
   margin: 12px 0px;
   padding: 12px;
   border-radius: 8px;
-  width: 350px;
+  width: 450px;
   position: relative;
   @media screen and (max-width: 900px) {
     display: block;
-    width: 250px;
+    width: 300px;
   }
 `;
 
@@ -80,7 +80,7 @@ export const Title = styled.div`
 
 export const HeaderView = styled.div`
   border: 2px solid #D8D8D8;
-  width: 350px;
+  width: 450px;
   margin: 12px 0px;
   padding: 12px;
   border-radius: 8px;
@@ -89,7 +89,7 @@ export const HeaderView = styled.div`
   justify-content: center;
   align-items: center;
   @media screen and (max-width: 900px) {
-    width: 250px;
+    width: 300px;
   }
 `;
 
@@ -151,7 +151,8 @@ export const Options = styled.div`
   width: 100%;
   @media screen and (max-width: 900px) {
     flex-direction: column;
-    margin: 8px;
+    justify-content: center;
+    width: auto;
   }
 `;
 
@@ -167,7 +168,7 @@ export const Sort = styled.div`
   margin: 8px 0px;
   margin-left: auto;
   @media screen and (max-width: 900px) {
-    justify-content: flex-end;
+    justify-content: flex-start;
   }
 `;
 
@@ -198,4 +199,12 @@ export const Label = styled.div`
   color: #000;
   font-size: 14px;
   margin: 4px;
+`;
+export const ErrorMessage = styled.div` 
+  color: red;
+  font-size: 12px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 12px;
 `;

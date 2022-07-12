@@ -16,7 +16,7 @@ import {
   Footer,
   DeleteButton,
   Filter,
-  Label
+  Label,
 } from '../list.styles'
 
 const Header = (props) => {
@@ -27,7 +27,7 @@ const Header = (props) => {
     saveContacts,
     onClearAll,
     filterType,
-    filterContacts
+    filterContacts,
   } = props
   const [countries, setCountries] = useState([])
   let count = contacts?.length

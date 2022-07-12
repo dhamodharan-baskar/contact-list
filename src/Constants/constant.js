@@ -47,3 +47,30 @@ export const DROPDOWN_CUSTOM_STYLE = {
     marginTop: '0px'
   }),
 };
+
+export const contactValidation = {
+  email: true,
+  cell: true,
+  name: {
+    title: true,
+    first: true,
+    last: true
+  },
+  picture: {
+    large: true
+  },
+  dob: {
+    date: true,
+    age: true
+  },
+  location: {
+    state: true,
+    city: true,
+    postcode: true,
+    country: true,
+    street: {
+      number: true,
+      name: true
+    }
+  }
+}

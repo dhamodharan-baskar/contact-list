@@ -12,13 +12,15 @@ import {
   Button,
   PrimaryButton,
 	FooterOption,
-	ImageUpload
+	ImageUpload,
+  ErrorMessage
 } from '../list.styles'
 
 const Details = (props) => {
   const {
     contact,
-    onSaveContact
+    onSaveContact,
+    isValidated
   } = props
   const [contactData , setContact] = useState(contact)
   const [editMode, setEditMode] = useState(false)
@@ -73,6 +75,7 @@ const Details = (props) => {
           dob={contactData?.dob}
           cell={contactData?.cell}
           email={contactData?.email}
+          isValidated={isValidated}
           onEditContact={(e) => onEditContact(e)}
           onChangeDate={(e) => onChangeDate(e)}
         />
@@ -83,12 +86,16 @@ const Details = (props) => {
       } 
       <FooterOption>
        <Button onClick={() => setEditMode(!editMode)}>
-          Edit
+        {editMode ? 'Cancel' : 'Edit'}
         </Button>
-        <PrimaryButton onClick={() => onSaveContact(contactData)}>
+        {editMode &&
+          <PrimaryButton onClick={() => onSaveContact(contactData)}>
           Save
-        </PrimaryButton>
+          </PrimaryButton> }
       </FooterOption>
+      {(!isValidated && editMode) &&
+       <ErrorMessage>fill all fields</ErrorMessage>
+      }
       </ContactDetails>
     </DetailsOverview>
   )
