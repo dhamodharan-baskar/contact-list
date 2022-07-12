@@ -65,7 +65,7 @@ export const Title = styled.div`
 `;
 
 export const HeaderView = styled.div`
-  border: 1px solid;
+  border: 2px solid #D8D8D8;
   width: 350px;
   padding: 12px;
   display: flex;

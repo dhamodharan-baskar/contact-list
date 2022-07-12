@@ -1,15 +1,27 @@
+import { useState, useCallback } from 'react';
 import moment from 'moment';
+import EditMode from './EditMode'
+import ViewMode from './ViewMode'
+import {setContactData} from '../../../Utils/helper'
 import {
   DetailsOverview,
   ContactDetails,
-  ContactItem,
-  Title
+  Button,
+  PrimaryButton
 } from '../list.styles'
 
 const Details = (props) => {
   const {
     contact
   } = props
+  const [contactData , setContact] = useState(contact)
+  const [editMode, setEditMode] = useState(false)
+
+  const onEditContact = useCallback((e) => {
+    let data = setContactData(contactData, e)
+    setContact({...data})
+  },[])
+
   return (
     <DetailsOverview>
       <div>
@@ -22,34 +34,28 @@ const Details = (props) => {
           alt="" />
       </div>
       <ContactDetails>
-        <ContactItem>
-         {`${contact?.name?.title} ${contact?.name?.first} ${contact?.name?.last}`}
-        </ContactItem>
-        <ContactItem>{moment(contact?.dob?.date).format("DD/MM/YYYY")} - {`${contact?.dob?.age} years old`}</ContactItem>
-        <ContactItem>{`${contact?.cell}`}</ContactItem>
-        <ContactItem>
-          <a href={`mailto:${contact?.email}`}>{contact?.email}</a>
-        </ContactItem>
-       { contact?.location && 
-          <div>
-          <Title>Address:</Title>
-          {
-            contact?.location?.street &&
-            <ContactItem>
-              {contact?.location?.street?.number + ' , ' + contact?.location?.street?.name}
-            </ContactItem>
-          }
-          <ContactItem>
-            {contact?.location?.city}
-          </ContactItem>
-          <ContactItem>
-          {contact?.location?.state + " - " +contact?.location?.postcode}
-          </ContactItem>
-          <ContactItem>
-          {contact?.location?.country}
-          </ContactItem>
-          </div>
-      }
+      {editMode ?
+        <EditMode 
+          name={contactData?.name}
+          location={contactData?.location}
+          dob={contactData?.dob}
+          cell={contactData?.cell}
+          email={contactData?.email}
+          onEditContact={(e) => onEditContact(e)}
+        />
+        :
+        <ViewMode 
+          contact={contact}
+        />
+      } 
+      <div>
+       <Button onClick={() => setEditMode(!editMode)}>
+          Edit
+        </Button>
+        <PrimaryButton>
+          Save
+        </PrimaryButton>
+      </div>
       </ContactDetails>
     </DetailsOverview>
   )
